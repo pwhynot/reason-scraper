@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/reason-scraper";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
