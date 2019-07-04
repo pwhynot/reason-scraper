@@ -20,17 +20,26 @@ app.use(express.static("public"));
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/reason-scraper";
 
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true
-  });
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
+mongoose.connect(MONGODB_URI).then(() => {
+    console.log('Mongoose is connected');
+}, (err) => console.log(err));
 
-  app.engine("handlebars", exphbs({
-      defaultLayout: "main"
-    })
-  );
+mongoose.connection.once('open', () => console.log('Good to go!'))
+    .on('error', (error) => {
+        console.warn('Warning', error);
+    });
 
-  app.set("view engine", "handlebars");
+//figure out handlebars after scraper is working properly 
+  //app.engine("handlebars", exphbs({
+     // defaultLayout: "main"
+    //})
+ // );
+
+  //app.set("view engine", "handlebars");
   
   require("./routes/htmlRoute")(app);
  
