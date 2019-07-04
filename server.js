@@ -28,7 +28,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/reason-scraper";
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
@@ -44,11 +44,12 @@ mongoose.connection.once("open", () => console.log("Good to go!"))
     });
   
   require("./routes/htmlRoute")(app);
+  
 
   app.get("/scrape", function(req, res) {
     axios.get("https://reason.com/").then(function(response) {
       var $ = cheerio.load(response.data);
-      $("p.title").each(function(i, element) {
+      $("h2").each(function(i, element) {
         var result = {};
       result.title = $(this)
         .children("a")
