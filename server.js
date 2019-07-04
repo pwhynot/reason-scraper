@@ -18,19 +18,19 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://pwhynot1605:SRH1991!@ds347367.mlab.com:47367/heroku_bblp92zb";
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
 
 mongoose.connect(MONGODB_URI).then(() => {
-    console.log('Mongoose is connected');
+    console.log("Mongoose is connected");
 }, (err) => console.log(err));
 
-mongoose.connection.once('open', () => console.log('Good to go!'))
-    .on('error', (error) => {
-        console.warn('Warning', error);
+mongoose.connection.once("open", () => console.log("Good to go!"))
+    .on("error", (error) => {
+        console.warn("Warning", error);
     });
 
 //figure out handlebars after scraper is working properly 
