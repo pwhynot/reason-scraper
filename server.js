@@ -27,7 +27,7 @@ mongoose.connect(MONGODB_URI, {
 
   
 app.get("/", function(req, res) {
-  res.render("index", {user: req.user});
+  res.render("index");
 });
   
 
