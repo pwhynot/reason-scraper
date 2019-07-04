@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use(express.static("views"));
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://patrick1605:SRH1605!>@ds347367.mlab.com:47367/heroku_bblp92zb";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
