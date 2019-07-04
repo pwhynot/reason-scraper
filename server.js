@@ -21,11 +21,14 @@ app.use(express.json());
 app.use(express.static("views"));
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://pwhynot1605:SRH1991!@ds347367.mlab.com:47367/heroku_bblp92zb";
-mongoose.connect(MONGODB_URI);
-//mongoose.set("useNewUrlParser", true);
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true
+});
 
   
-  require("./routes/htmlRoute")(app);
+app.get("/", function(req, res) {
+  res.render("index", {user: req.user});
+});
   
 
   app.get("/scrape", function(req, res) {
