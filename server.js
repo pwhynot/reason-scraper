@@ -37,7 +37,7 @@ mongoose.connect(MONGODB_URI, {
   app.get("/scrape", function (req, res) {
     axios.get("https://reason.com/").then(function (response) {
       var $ = cheerio.load(response.data);
-      $("article h2").each(function (i, element) {
+      $("p.title").each(function (i, element) {
         var result = {};
         result.title = $(this)
           .children("a")
