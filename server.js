@@ -23,25 +23,15 @@ app.use(express.static("views"));
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://pwhynot1605:SRH1991!@ds347367.mlab.com:47367/heroku_bblp92zb";
 mongoose.connect(MONGODB_URI);
 //mongoose.set("useNewUrlParser", true);
-//mongoose.set("useFindAndModify", false);
-//mongoose.set("useCreateIndex", true);
 
-//mongoose.connect(MONGODB_URI).then(() => {
-    //console.log("Mongoose is connected");
-//}, (err) => console.log(err));
-
-//mongoose.connection.once("open", () => console.log("Good to go!"))
-  //  .on("error", (error) => {
-    //    console.warn("Warning", error);
-    //});
   
   require("./routes/htmlRoute")(app);
   
 
   app.get("/scrape", function(req, res) {
-    axios.get("https://reason.com/").then(function(response) {
+    axios.get("https://reason.com/stossel/").then(function(response) {
       var $ = cheerio.load(response.data);
-      $("h2").each(function(i, element) {
+      $("h4").each(function(i, element) {
         var result = {};
       result.title = $(this)
         .children("a")
@@ -50,17 +40,17 @@ mongoose.connect(MONGODB_URI);
         .children("a")
         .attr("href");
 
-      db.Article.create(result)
-        .then( dbArticle =>  {
+        db.Article.create(result)
+        .then(function (dbArticle) {
           console.log(dbArticle);
-          res.render("index", {this: title});
         })
         .catch(function (err) {
           console.log(err);
-        });
+        })
+      console.log(result);
       });
 
-      res.send("Scrape Complete");
+      res.send("Scrape Complete!");
     });
   });
 
