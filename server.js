@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use(express.static("views"));
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/reason-scraper";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
