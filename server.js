@@ -25,10 +25,9 @@ mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true
 });
 
+require("./routes/htmlRoutes");
   
-app.get("/", function(req, res) {
-  res.render("index");
-});
+
   
 
   app.get("/scrape", function(req, res) {
